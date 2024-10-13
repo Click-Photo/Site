@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React from 'react'
 
 interface JobCardProps {
@@ -15,42 +16,42 @@ const JobCard: React.FC<JobCardProps> = ({
   photographerName,
   photographerImage,
 }) => (
-  <section className="flex flex-col pb-8 mx-auto mt-12 w-full rounded-3xl bg-zinc-300 bg-opacity-90 max-md:mt-10 max-md:max-w-full">
-    <div className="flex z-10 gap-2.5 self-center py-1 pr-2 pl-6 ml-12 max-w-full text-xs font-bold leading-none text-center whitespace-nowrap rounded-xl bg-neutral-900 text-zinc-500 w-[114px] max-md:pl-5">
+  <section className="mx-auto mt-12 flex w-full flex-col rounded-3xl bg-zinc-300 bg-opacity-90 pb-8 max-md:mt-10 max-md:max-w-full">
+    <div className="z-10 ml-12 flex w-[114px] max-w-full gap-2.5 self-center whitespace-nowrap rounded-xl bg-neutral-900 py-1 pl-6 pr-2 text-center text-xs font-bold leading-none text-zinc-500 max-md:pl-5">
       <div className="my-auto">ACEITO</div>
-      <img
+      <Image
         loading="lazy"
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/76965eef2a4929b493118c2b0e5f22b8c002860a99ef52af73d0cf2c5a041428?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
         alt=""
-        className="object-contain shrink-0 aspect-square w-[29px]"
+        className="aspect-square w-[29px] shrink-0 object-contain"
       />
     </div>
-    <div className="flex flex-wrap gap-5 justify-between px-8 py-4 font-bold bg-white rounded-3xl text-neutral-950 max-md:px-5 max-md:max-w-full">
+    <div className="flex flex-wrap justify-between gap-5 rounded-3xl bg-white px-8 py-4 font-bold text-neutral-950 max-md:max-w-full max-md:px-5">
       <div className="text-base leading-none">
-        <span className="text-xs ">DATA DO JOB</span> {date}
+        <span className="text-xs">DATA DO JOB</span> {date}
       </div>
-      <div className="text-3xl text-center">{price}</div>
+      <div className="text-center text-3xl">{price}</div>
     </div>
-    <div className="flex gap-5 justify-between mt-4 mr-8 ml-8 text-center text-black max-md:mr-2.5 max-md:max-w-full">
-      <div className="flex gap-6 items-start text-2xl font-bold leading-none">
-        <img
+    <div className="ml-8 mr-8 mt-4 flex justify-between gap-5 text-center text-black max-md:mr-2.5 max-md:max-w-full">
+      <div className="flex items-start gap-6 text-2xl font-bold leading-none">
+        <Image
           loading="lazy"
           src={photographerImage}
           alt={`Profile picture of ${photographerName}`}
-          className="object-contain shrink-0 aspect-[0.96] rounded-[30px] w-[47px]"
+          className="aspect-[0.96] w-[47px] shrink-0 rounded-[30px] object-contain"
         />
-        <div className="flex flex-col mt-2">
+        <div className="mt-2 flex flex-col">
           <div>{photographerName}</div>
-          <div className="flex shrink-0 mt-4 h-[30px] w-[147px]" />
+          <div className="mt-4 flex h-[30px] w-[147px] shrink-0" />
         </div>
       </div>
       <div className="self-start text-xl leading-none">Ver Perfil</div>
     </div>
-    <div className="flex gap-5 justify-between self-center mt-12 max-w-full text-xl font-bold leading-none text-center text-white whitespace-nowrap w-[435px] max-md:mt-10">
-      <button className="px-11 py-6 bg-red-900 rounded-3xl max-md:px-5">
+    <div className="mt-12 flex w-[435px] max-w-full justify-between gap-5 self-center whitespace-nowrap text-center text-xl font-bold leading-none text-white max-md:mt-10">
+      <button className="rounded-3xl bg-red-900 px-11 py-6 max-md:px-5">
         Recusar
       </button>
-      <button className="px-11 py-6 bg-green-700 rounded-3xl max-md:px-5">
+      <button className="rounded-3xl bg-green-700 px-11 py-6 max-md:px-5">
         Aceitar
       </button>
     </div>

@@ -1,4 +1,5 @@
-'use client' 
+'use client'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
@@ -15,9 +16,9 @@ const JobDetailsPage: React.FC = () => {
   }
 
   return (
-    <div className="p-8 bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
-      <img src={job.imageUrl} alt={job.title} className="rounded-lg mb-4" />
+    <div className="bg-gray-900 p-8 text-white">
+      <h1 className="mb-4 text-3xl font-bold">{job.title}</h1>
+      <Image src={job.imageUrl} alt={job.title} className="mb-4 rounded-lg" />
       <p className="text-lg">{job.description}</p>
       <p className="text-2xl font-bold">R$ {job.price.toFixed(2)}</p>
       <p className="text-sm text-gray-400">{job.date}</p>

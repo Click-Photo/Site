@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         className={cn(
-          'antialiased bg-black-click text-white',
+          'bg-black-click text-white antialiased',
           primary.className,
           secondary.variable,
         )}

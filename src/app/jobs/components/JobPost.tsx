@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface JobPostProps {
@@ -20,24 +21,24 @@ const JobPost: React.FC<JobPostProps> = ({
   onViewDetails,
 }) => {
   return (
-    <div className="bg-white text-black shadow-md rounded-lg p-6 transition-transform transform hover:scale-105 duration-300 ease-in-out">
-      <img
+    <div className="transform rounded-lg bg-white p-6 text-black shadow-md transition-transform duration-300 ease-in-out hover:scale-105">
+      <Image
         src={imageUrl}
         alt={title}
-        className="w-full h-40 object-cover rounded-lg mb-4"
+        className="mb-4 h-40 w-full rounded-lg object-cover"
       />
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <h3 className="mb-2 text-xl font-semibold">{title}</h3>
       <p className="text-black-click">{description}</p>
-      <p className="text-green-400 font-bold">{`R$${price}`}</p>
-      <p className="text-black-click text-sm">{date}</p>
+      <p className="font-bold text-green-400">{`R$${price}`}</p>
+      <p className="text-sm text-black-click">{date}</p>
       <button
         onClick={() => onViewDetails(id)}
-        className="mt-4 bg-neutral-900 text-white py-2 px-4 rounded-lg hover:bg-blue-500"
+        className="mt-4 rounded-lg bg-neutral-900 px-4 py-2 text-white hover:bg-blue-500"
       >
         Ver Detalhes
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default JobPost;
+export default JobPost

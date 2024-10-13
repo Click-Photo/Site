@@ -8,6 +8,8 @@ import JobPost from './components/JobPost'
 import SearchBar from './components/SearchBar'
 import { useRouter } from 'next/navigation'
 import ProfileCard from './components/ProfileCard'
+import { Button } from '@/components/Button'
+import { Play } from 'lucide-react'
 
 const JobListPage: React.FC = () => {
   const router = useRouter()
@@ -74,55 +76,69 @@ const JobListPage: React.FC = () => {
   }
 
   return (
-    <main className="flex">
-      <aside className="w-1/4 p-4 bg-black-click text-white h-screen fixed">
-        <div className="text-center mb-8">
-          <Image src={logo} alt="Logo Click" className="mx-auto mb-4" />
-          <h1 className="text-2xl font-bold">Olá, Ana Fernandes</h1>
-          <p>20 Jobs</p>
-          <p className="text-yellow-400">⭐ 4.5</p>
-        </div>
-        <div className="flex flex-col space-y-4">
-          <button className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600">INFO</button>
-          <button className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600">JOBS</button>
-          <button className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600">POSTAR JOB</button>
-        </div>
-        
-      </aside>
-      
-
-      {/* Conteúdo principal */}
-      <section className="ml-[25%] w-[50%] p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {jobs.map((job) => (
-            <JobPost
-              key={job.id}
-              id={job.id}
-              title={job.title}
-              description={job.description}
-              price={job.price}
-              date={job.date}
-              imageUrl={job.imageUrl}
-              onViewDetails={handleViewDetails}
-            />
-          ))}
-        </div>
+    <>
+      <section className="flex h-screen w-screen flex-col items-center justify-center gap-4">
+        <Image src={logo} alt="Logo Click" />
+        <h1 className="text-4xl font-bold">Hello Click!</h1>
+        <Button className="bg-white font-secondary text-black hover:bg-neutral-300">
+          <span className="">Começar</span>
+          <Play color="black" fill="black" />
+        </Button>
       </section>
+      <main className="flex">
+        <aside className="fixed h-screen w-1/4 bg-black-click p-4 text-white">
+          <div className="mb-8 text-center">
+            <Image src={logo} alt="Logo Click" className="mx-auto mb-4" />
+            <h1 className="text-2xl font-bold">Olá, Ana Fernandes</h1>
+            <p>20 Jobs</p>
+            <p className="text-yellow-400">⭐ 4.5</p>
+          </div>
+          <div className="flex flex-col space-y-4">
+            <button className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600">
+              INFO
+            </button>
+            <button className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600">
+              JOBS
+            </button>
+            <button className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600">
+              POSTAR JOB
+            </button>
+          </div>
+        </aside>
 
-      <aside className="w-1/4 p-6 bg-neutral-800 text-white">
-        <h2 className="mb-6 text-xl">Fotógrafos</h2>
-        <div className="flex space-x-4">
-          {photographers.map((photographer) => (
-            <ProfileCard
-              key={photographer.name}
-              name={photographer.name}
-              imageUrl={photographer.imageUrl}
-            />
-          ))}
-        </div>
-        <SearchBar />
-      </aside>
-    </main>
+        {/* Conteúdo principal */}
+        <section className="ml-[25%] w-[50%] p-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+            {jobs.map((job) => (
+              <JobPost
+                key={job.id}
+                id={job.id}
+                title={job.title}
+                description={job.description}
+                price={job.price}
+                date={job.date}
+                imageUrl={job.imageUrl}
+                onViewDetails={handleViewDetails}
+              />
+            ))}
+          </div>
+        </section>
+
+        <aside className="w-1/4 bg-neutral-800 p-6 text-white">
+          <h2 className="mb-6 text-xl">Fotógrafos</h2>
+          <div className="flex space-x-4">
+            {photographers.map((photographer) => (
+              <ProfileCard
+                key={photographer.name}
+                name={photographer.name}
+                imageUrl={photographer.imageUrl}
+              />
+            ))}
+          </div>
+          <SearchBar />
+        </aside>
+      </main>
+    </>
   )
 }
 

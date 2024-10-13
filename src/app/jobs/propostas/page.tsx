@@ -3,6 +3,7 @@ import React from 'react'
 import ProfileCard from './components/ProfileCard'
 import JobCard from './components/JobCard'
 import SearchBar from './components/Searchbar'
+import Image from 'next/image'
 
 const MyComponent: React.FC = () => {
   const photographers = [
@@ -26,47 +27,47 @@ const MyComponent: React.FC = () => {
       imageUrl:
         'https://cdn.builder.io/api/v1/image/assets/TEMP/a80a5566016abc84002913addc62498abb22b63a97c7c9f6d0830bbb9f7358c5?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
     },
-  ];
+  ]
 
   return (
     <main className="flex h-screen overflow-hidden bg-neutral-950">
       {/* Barra lateral */}
-      <aside className="w-1/4 flex flex-col items-center py-10 bg-black-click text-white">
-        <img
+      <aside className="flex w-1/4 flex-col items-center bg-black-click py-10 text-white">
+        <Image
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/c68902f1b403a59d12a231425ec202dc2db161f6fed23bb37b54771d37852985?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
           alt="User avatar"
-          className="object-contain w-24 h-24 rounded-full"
+          className="h-24 w-24 rounded-full object-contain"
         />
         <h1 className="mt-6 text-2xl">Olá, Ana Fernandes</h1>
         <div className="mt-6 text-center">
           <p className="text-lg">20 Jobs</p>
-          <div className="flex items-center justify-center gap-2 mt-3">
+          <div className="mt-3 flex items-center justify-center gap-2">
             <span className="text-yellow-500">(32)</span>
-            <img
+            <Image
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/73d75667eaeb7dd914cf77cba9414e8e025d538d22288abaf02ae0d7264f733f?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
               alt="Rating stars"
-              className="object-contain w-24"
+              className="w-24 object-contain"
             />
           </div>
         </div>
-        <nav className="mt-12 space-y-4 w-full text-center">
+        <nav className="mt-12 w-full space-y-4 text-center">
           <a
             href="#info"
-            className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600"
+            className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
             INFO
           </a>
           <a
             href="#jobs"
-            className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600"
+            className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
             JOBS
           </a>
           <a
             href="#post-job"
-            className="block py-3 text-lg bg-zinc-300 rounded-full text-neutral-600"
+            className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
             POSTAR JOB
           </a>
@@ -77,7 +78,7 @@ const MyComponent: React.FC = () => {
       <div className="w-0.5 bg-white" />
 
       {/* Área de Jobs */}
-      <section className="flex-grow px-10 py-5 overflow-y-auto">
+      <section className="flex-grow overflow-y-auto px-10 py-5">
         <JobCard
           date="18 DEZ. 2024"
           price="R$ 2.460"
@@ -93,7 +94,7 @@ const MyComponent: React.FC = () => {
       </section>
 
       {/* Seção de Fotógrafos */}
-      <aside className="w-1/4 p-6 bg-neutral-800 text-white">
+      <aside className="w-1/4 bg-neutral-800 p-6 text-white">
         <h2 className="mb-6 text-xl">Fotógrafos</h2>
         <div className="flex space-x-4">
           {photographers.map((photographer) => (

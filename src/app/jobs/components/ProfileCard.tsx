@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React from 'react'
 
 interface ProfileCardProps {
@@ -8,12 +9,12 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ name, imageUrl }) => (
-  <div className="flex flex-col items-start pr-1.5 pl-5 mt-6 text-xs">
-    <img
+  <div className="mt-6 flex flex-col items-start pl-5 pr-1.5 text-xs">
+    <Image
       loading="lazy"
       src={imageUrl}
       alt={`Profile picture of ${name}`}
-      className="object-contain aspect-[0.96] rounded-[30px] w-[65px]"
+      className="aspect-[0.96] w-[65px] rounded-[30px] object-contain"
     />
     <div className="mt-2">{name}</div>
   </div>

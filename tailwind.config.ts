@@ -14,6 +14,8 @@ const config: Config = {
       },
       colors: {
         'black-click': '#0B0B0B',
+        'gray-dark-click': '#141414',
+        'gray-light-click': '#DCDCDC',
       },
     },
   },

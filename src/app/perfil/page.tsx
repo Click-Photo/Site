@@ -5,10 +5,10 @@ import { Play } from 'lucide-react'
 
 export default function Home() {
   return (
-    <section className="flex flex-col gap-4 w-screen h-screen items-center justify-center">
+    <section className="flex h-screen w-screen flex-col items-center justify-center gap-4">
       <Image src={logo} alt="Logo Click" />
       <h1 className="text-4xl font-bold">Hello Click!</h1>
-      <Button className="bg-white hover:bg-neutral-300 text-black font-secondary">
+      <Button className="bg-white font-secondary text-black hover:bg-neutral-300">
         <span className="">Começar</span>
         <Play color="black" fill="black" />
       </Button>
