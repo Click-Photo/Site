@@ -3,29 +3,37 @@ import React from 'react'
 import ProfileCard from './components/ProfileCard'
 import JobCard from './components/JobCard'
 import SearchBar from './components/Searchbar'
+import logo from '@/assets/logo.svg'
 import Image from 'next/image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const MyComponent: React.FC = () => {
   const photographers = [
     {
       name: 'Carolina',
       imageUrl:
-        'https://cdn.builder.io/api/v1/image/assets/TEMP/b9319905863f33ce622e5fee7ad39a067c3599dd4bc425dc8935c3c3c7aef03b?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
+        '',
     },
     {
       name: 'Cris',
       imageUrl:
-        'https://cdn.builder.io/api/v1/image/assets/TEMP/2ddff8c5eb0c286576d981905700be3f5a91aa31a66e2e2e1bdef5265c0e6176?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
+        '',
     },
     {
       name: 'Júlia',
       imageUrl:
-        'https://cdn.builder.io/api/v1/image/assets/TEMP/35f8bf9de05ffa564ee34ed869f09c24a2b04a39162180dd1b5ffa253dcedab2?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
+        '',
     },
     {
       name: 'Amanda',
       imageUrl:
-        'https://cdn.builder.io/api/v1/image/assets/TEMP/a80a5566016abc84002913addc62498abb22b63a97c7c9f6d0830bbb9f7358c5?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
+        '',
     },
   ]
 
@@ -33,23 +41,14 @@ const MyComponent: React.FC = () => {
     <main className="flex h-screen overflow-hidden bg-neutral-950">
       {/* Barra lateral */}
       <aside className="flex w-1/4 flex-col items-center bg-black-click py-10 text-white">
-        <Image
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c68902f1b403a59d12a231425ec202dc2db161f6fed23bb37b54771d37852985?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
-          alt="User avatar"
-          className="h-24 w-24 rounded-full object-contain"
-        />
+      <Image src={logo} alt="Logo Click" />
         <h1 className="mt-6 text-2xl">Olá, Ana Fernandes</h1>
         <div className="mt-6 text-center">
           <p className="text-lg">20 Jobs</p>
           <div className="mt-3 flex items-center justify-center gap-2">
+          <FontAwesomeIcon icon={faStar} className="text-lg text-white self-center" />
             <span className="text-yellow-500">(32)</span>
-            <Image
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/73d75667eaeb7dd914cf77cba9414e8e025d538d22288abaf02ae0d7264f733f?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
-              alt="Rating stars"
-              className="w-24 object-contain"
-            />
+           
           </div>
         </div>
         <nav className="mt-12 w-full space-y-4 text-center">
@@ -57,19 +56,21 @@ const MyComponent: React.FC = () => {
             href="#info"
             className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
-            INFO
+            <FontAwesomeIcon icon={faUser} className="text-lg" /> INFO
           </a>
+
           <a
             href="#jobs"
             className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
-            JOBS
+          <FontAwesomeIcon icon={faBriefcase} className="text-lg" /> 
+                        JOBS
           </a>
           <a
             href="#post-job"
             className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
-            POSTAR JOB
+                        <FontAwesomeIcon icon={faPlus} className="text-lg" />  POSTAR JOB
           </a>
         </nav>
       </aside>
@@ -83,13 +84,13 @@ const MyComponent: React.FC = () => {
           date="18 DEZ. 2024"
           price="R$ 2.460"
           photographerName="Nome Do Fotografo"
-          photographerImage="https://cdn.builder.io/api/v1/image/assets/TEMP/d8988aec39d7202ed4a5b19ef8ead2aa5cdb7435c6f8be549d17e6e29eb3cbe7?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
+          photographerImage=""
         />
         <JobCard
           date="18 DEZ. 2024"
           price="R$ 2.590"
           photographerName="Nome Do Fotografo"
-          photographerImage="https://cdn.builder.io/api/v1/image/assets/TEMP/c2ae8727a07bea9d875e6770cf7b673d68211ac5eedcaf4a625a32176f349747?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
+          photographerImage=""
         />
       </section>
 

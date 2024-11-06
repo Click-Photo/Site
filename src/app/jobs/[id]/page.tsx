@@ -12,7 +12,7 @@ const JobDetailsPage: React.FC = () => {
     price: 2500,
     date: '20 DEZ. 2024',
     imageUrl:
-      'https://cdn.builder.io/api/v1/image/assets/TEMP/f9725cf3c1b411b2e759ff00d7d9327a41bb1142ce7189b7d1f9b68529563a93?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44',
+      '',
   }
 
   return (

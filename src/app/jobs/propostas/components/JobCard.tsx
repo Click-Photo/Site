@@ -17,15 +17,6 @@ const JobCard: React.FC<JobCardProps> = ({
   photographerImage,
 }) => (
   <section className="mx-auto mt-12 flex w-full flex-col rounded-3xl bg-zinc-300 bg-opacity-90 pb-8 max-md:mt-10 max-md:max-w-full">
-    <div className="z-10 ml-12 flex w-[114px] max-w-full gap-2.5 self-center whitespace-nowrap rounded-xl bg-neutral-900 py-1 pl-6 pr-2 text-center text-xs font-bold leading-none text-zinc-500 max-md:pl-5">
-      <div className="my-auto">ACEITO</div>
-      <Image
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/76965eef2a4929b493118c2b0e5f22b8c002860a99ef52af73d0cf2c5a041428?placeholderIfAbsent=true&apiKey=04921d589e6d467aaf5d72b4f1f97f44"
-        alt=""
-        className="aspect-square w-[29px] shrink-0 object-contain"
-      />
-    </div>
     <div className="flex flex-wrap justify-between gap-5 rounded-3xl bg-white px-8 py-4 font-bold text-neutral-950 max-md:max-w-full max-md:px-5">
       <div className="text-base leading-none">
         <span className="text-xs">DATA DO JOB</span> {date}
@@ -36,10 +27,10 @@ const JobCard: React.FC<JobCardProps> = ({
       <div className="flex items-start gap-6 text-2xl font-bold leading-none">
         <Image
           loading="lazy"
-          src={photographerImage}
-          alt={`Profile picture of ${photographerName}`}
+          src=""
+          alt={`Foto do Fotografo ${photographerName}`}
           className="aspect-[0.96] w-[47px] shrink-0 rounded-[30px] object-contain"
-        />
+        /> 
         <div className="mt-2 flex flex-col">
           <div>{photographerName}</div>
           <div className="mt-4 flex h-[30px] w-[147px] shrink-0" />

@@ -12,7 +12,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, imageUrl }) => (
   <div className="mt-6 flex flex-col items-start pl-5 pr-1.5 text-xs">
     <Image
       loading="lazy"
-      src={imageUrl}
+      src=""
       alt={`Profile picture of ${name}`}
       className="aspect-[0.96] w-[65px] rounded-[30px] object-contain"
     />

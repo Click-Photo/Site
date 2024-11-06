@@ -14,6 +14,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, imageUrl }) => (
       loading="lazy"
       src={imageUrl}
       alt={`Profile picture of ${name}`}
+      width={65}
+      height={65}
       className="aspect-[0.96] w-[65px] rounded-[30px] object-contain"
     />
     <div className="mt-2">{name}</div>

@@ -7,7 +7,6 @@ interface JobPostProps {
   description: string
   price: number
   date: string
-  imageUrl: string
   onViewDetails: (id: string) => void
 }
 
@@ -17,16 +16,10 @@ const JobPost: React.FC<JobPostProps> = ({
   description,
   price,
   date,
-  imageUrl,
   onViewDetails,
 }) => {
   return (
     <div className="transform rounded-lg bg-white p-6 text-black shadow-md transition-transform duration-300 ease-in-out hover:scale-105">
-      <Image
-        src={imageUrl}
-        alt={title}
-        className="mb-4 h-40 w-full rounded-lg object-cover"
-      />
       <h3 className="mb-2 text-xl font-semibold">{title}</h3>
       <p className="text-black-click">{description}</p>
       <p className="font-bold text-green-400">{`R$${price}`}</p>
