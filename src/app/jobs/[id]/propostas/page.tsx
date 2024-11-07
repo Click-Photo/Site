@@ -6,34 +6,30 @@ import SearchBar from './components/Searchbar'
 import logo from '@/assets/logo.svg'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { faBriefcase } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
-
+import {
+  faBriefcase,
+  faUser,
+  faPlus,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons'
 
 const MyComponent: React.FC = () => {
   const photographers = [
     {
       name: 'Carolina',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
     {
       name: 'Cris',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
     {
       name: 'Júlia',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
     {
       name: 'Amanda',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
   ]
 
@@ -41,14 +37,16 @@ const MyComponent: React.FC = () => {
     <main className="flex h-screen overflow-hidden bg-neutral-950">
       {/* Barra lateral */}
       <aside className="flex w-1/4 flex-col items-center bg-black-click py-10 text-white">
-      <Image src={logo} alt="Logo Click" />
+        <Image src={logo} alt="Logo Click" />
         <h1 className="mt-6 text-2xl">Olá, Ana Fernandes</h1>
         <div className="mt-6 text-center">
           <p className="text-lg">20 Jobs</p>
           <div className="mt-3 flex items-center justify-center gap-2">
-          <FontAwesomeIcon icon={faStar} className="text-lg text-white self-center" />
+            <FontAwesomeIcon
+              icon={faStar}
+              className="self-center text-lg text-white"
+            />
             <span className="text-yellow-500">(32)</span>
-           
           </div>
         </div>
         <nav className="mt-12 w-full space-y-4 text-center">
@@ -63,14 +61,14 @@ const MyComponent: React.FC = () => {
             href="#jobs"
             className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
-          <FontAwesomeIcon icon={faBriefcase} className="text-lg" /> 
-                        JOBS
+            <FontAwesomeIcon icon={faBriefcase} className="text-lg" />
+            JOBS
           </a>
           <a
             href="#post-job"
             className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600"
           >
-                        <FontAwesomeIcon icon={faPlus} className="text-lg" />  POSTAR JOB
+            <FontAwesomeIcon icon={faPlus} className="text-lg" /> POSTAR JOB
           </a>
         </nav>
       </aside>

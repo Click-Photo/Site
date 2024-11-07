@@ -8,6 +8,8 @@ import JobPost from './components/JobPost'
 import SearchBar from './components/SearchBar'
 import { useRouter } from 'next/navigation'
 import ProfileCard from './components/ProfileCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/Button'
 import { Play } from 'lucide-react'
 
@@ -44,21 +46,19 @@ const JobListPage: React.FC = () => {
   const photographers = [
     {
       name: 'Carolina',
-      imageUrl:''    },
+      imageUrl: '',
+    },
     {
       name: 'Cris',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
     {
       name: 'Júlia',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
     {
       name: 'Amanda',
-      imageUrl:
-        '',
+      imageUrl: '',
     },
   ]
 
@@ -74,7 +74,10 @@ const JobListPage: React.FC = () => {
             <Image src={logo} alt="Logo Click" className="mx-auto mb-4" />
             <h1 className="text-2xl font-bold">Olá, Ana Fernandes</h1>
             <p>20 Jobs</p>
-            <p className="text-yellow-400">⭐ 4.5</p>
+            <FontAwesomeIcon
+              icon={faStar}
+              className="self-center text-lg text-white"
+            />
           </div>
           <div className="flex flex-col space-y-4">
             <button className="block rounded-full bg-zinc-300 py-3 text-lg text-neutral-600">

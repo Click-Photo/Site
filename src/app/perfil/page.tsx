@@ -9,19 +9,22 @@ interface UserProfileProps {
   jobsCompleted?: number
   rating?: number
   bookedJobs?: number
-  address?: string // Endereço do usuário
-  contact?: string // Contato do usuário
-  portfolioPhotos?: string[] // Fotos do portfólio do fotógrafo
-  clientJobs?: string[] // Trabalhos do cliente
+  address?: string
+  contact?: string
+  whatsapp?: string // Número de WhatsApp do usuário
+  email?: string // E-mail do usuário
+  portfolioPhotos?: string[]
+  clientJobs?: string[]
 }
 
-// Dados de exemplo para o usuário
 const user: UserProfileProps = {
   name: 'Ana Fernandes',
-  userType: 'fotografo', // ou 'cliente'
+  userType: 'fotografo',
   avatarUrl: 'https://example.com/avatar.jpg',
   address: 'Rua das Flores, 123',
   contact: '(11) 91234-5678',
+  whatsapp: 'https://wa.me/5511912345678', // Link para o WhatsApp
+  email: 'ana.fernandes@example.com', // E-mail do fotógrafo
   portfolioPhotos: [
     'https://example.com/photo1.jpg',
     'https://example.com/photo2.jpg',
@@ -34,9 +37,15 @@ const user: UserProfileProps = {
 }
 
 const ProfilePage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<
-    'info' | 'portfolio' | 'clientJobs'
-  >('info')
+  const [activeTab, setActiveTab] = useState<'info' | 'portfolio' | 'clientJobs' | 'contact'>('info')
+  const [portfolioPhotos, setPortfolioPhotos] = useState(user.portfolioPhotos || [])
+
+  const handleUploadPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const newPhotoUrl = URL.createObjectURL(event.target.files[0])
+      setPortfolioPhotos((prevPhotos) => [...prevPhotos, newPhotoUrl])
+    }
+  }
 
   return (
     <main className="p-6">
@@ -49,7 +58,13 @@ const ProfilePage: React.FC = () => {
       />
 
       {/* Abas de navegação */}
-      <div className="mt-4">
+      <div className="mt-4 flex space-x-4">
+        <button
+          onClick={() => setActiveTab('contact')}
+          className={`mr-4 ${activeTab === 'contact' ? 'font-bold' : ''}`}
+        >
+          Contato
+        </button>
         <button
           onClick={() => setActiveTab('info')}
           className={`mr-4 ${activeTab === 'info' ? 'font-bold' : ''}`}
@@ -76,6 +91,16 @@ const ProfilePage: React.FC = () => {
 
       {/* Conteúdo das Abas */}
       <div className="mt-4">
+        {activeTab === 'contact' && (
+          <div>
+            <h2 className="text-lg font-semibold">Contato</h2>
+            <p>
+              WhatsApp: <a href={user.whatsapp} target="_blank" rel="noopener noreferrer" className="text-blue-500">Converse no WhatsApp</a>
+            </p>
+            <p>Email: <a href={`mailto:${user.email}`} className="text-blue-500">{user.email}</a></p>
+          </div>
+        )}
+
         {activeTab === 'info' && (
           <div>
             <p>Endereço: {user.address}</p>
@@ -87,7 +112,7 @@ const ProfilePage: React.FC = () => {
           <div>
             <h2>Portfólio</h2>
             <div className="grid grid-cols-2 gap-4">
-              {user.portfolioPhotos?.map((photo, index) => (
+              {portfolioPhotos.map((photo, index) => (
                 <img
                   key={index}
                   src={photo}
@@ -95,6 +120,9 @@ const ProfilePage: React.FC = () => {
                   className="h-auto w-full"
                 />
               ))}
+            </div>
+            <div className="mt-4">
+              <input type="file" onChange={handleUploadPhoto} />
             </div>
           </div>
         )}
