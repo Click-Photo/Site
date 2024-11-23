@@ -30,7 +30,7 @@ const JobCard: React.FC<JobCardProps> = ({
           src=""
           alt={`Foto do Fotografo ${photographerName}`}
           className="aspect-[0.96] w-[47px] shrink-0 rounded-[30px] object-contain"
-        /> 
+        />
         <div className="mt-2 flex flex-col">
           <div>{photographerName}</div>
           <div className="mt-4 flex h-[30px] w-[147px] shrink-0" />

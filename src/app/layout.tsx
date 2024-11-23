@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import '@/styles/globals.css'
 import { cn } from '@/lib/utils'
 import { primary, secondary } from '@/styles/fonts'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 export const metadata: Metadata = {
   // TODO: mudar título e descrição
@@ -18,12 +19,12 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         className={cn(
-          'bg-black-click text-white antialiased',
+          'min-h-screen bg-black-click text-white antialiased',
           primary.className,
           secondary.variable,
         )}
       >
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   )

@@ -35,14 +35,8 @@ const ProfileInfo: React.FC = () => {
           </div>
         </div>
       </div>
-      <ActionButton
-        icon=""
-        text="INFO"
-      />
-      <ActionButton
-        icon=""
-        text="JOBS"
-      />
+      <ActionButton icon="" text="INFO" />
+      <ActionButton icon="" text="JOBS" />
       <div className="mt-6 flex gap-6 rounded-3xl bg-zinc-300 px-5 py-6 text-xl text-neutral-600">
         <div className="self-start">
           <span className="text-3xl">+</span>
