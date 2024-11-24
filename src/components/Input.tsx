@@ -6,8 +6,10 @@ const input = tv({
   base: 'flex-1 rounded-full border-none text-base h-max px-4 py-4 bg-gray-dark-click transition-all focus-visible:ring-gray-light-click focus-visible:ring-transparent focus-visible:ring-offset-2 placeholder:text-gray-light-click/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
   variants: {
     variant: {
-      icon: 'pl-14',
+      icon: 'pl-10 md:pl-14',
       ghost: 'border-black border-2 bg-transparent border-solid text-black',
+      'icon-white':
+        'pl-10 md:pl-14 border-2 bg-gray-light-click border-solid text-black',
     },
   },
 })
@@ -22,9 +24,9 @@ type InputProps = InputPropsUI &
 export function Input({ className, variant, icon, ...rest }: InputProps) {
   return (
     <>
-      <div className="relative flex h-max flex-1 items-center">
+      <div className="relative flex h-max items-center">
         {icon && (
-          <div className="pointer-events-none absolute left-6 h-max w-max">
+          <div className="pointer-events-none absolute left-4 h-max w-max md:left-6">
             {icon}
           </div>
         )}

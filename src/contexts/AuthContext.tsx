@@ -13,7 +13,7 @@ interface AuthContextType {
 
 const defaultUser: AuthContextType = {
   id: 'cd1b197d-e7f2-4ae1-a95a-7b44ce3f189a',
-  role: 'fotografo',
+  role: 'cliente',
 }
 
 export const AuthContext = createContext(defaultUser as AuthContextType)

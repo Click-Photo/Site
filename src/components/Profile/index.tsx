@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from '../ui/sheet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
 interface User {
   id: string
@@ -44,7 +44,10 @@ export function NavbarProfile() {
   return (
     <Sheet>
       <SheetTrigger>
-        <FontAwesomeIcon icon={faUser} className="h-5 w-5 md:h-7 md:w-7" />
+        <FontAwesomeIcon
+          icon={faCircleUser}
+          className="h-5 w-5 md:h-7 md:w-7"
+        />
       </SheetTrigger>
       <SheetContent
         className="w-screen overflow-auto border-none bg-gray-dark-click font-secondary"
