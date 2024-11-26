@@ -1,13 +1,5 @@
-'use client'
-
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { HeaderHome } from './components/HeaderHome'
 
 export default function Login() {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.push('/login')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  return <HeaderHome />
 }
