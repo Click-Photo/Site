@@ -21,6 +21,7 @@ export default function RootLayout({
         className={cn(
           'min-h-screen bg-black-click text-white antialiased',
           primary.className,
+          primary.variable,
           secondary.variable,
         )}
       >

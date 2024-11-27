@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        primary: 'var(--font-primary)',
         secondary: 'var(--font-secondary)',
       },
       colors: {

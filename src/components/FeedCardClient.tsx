@@ -12,12 +12,7 @@ import {
 } from './ui/dialog'
 import { Button } from './ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-
-export interface Photographer {
-  id: string
-  photo: string
-  name: string
-}
+import { Photographer } from '@/data/photographers'
 
 export interface FeedCardClientProps {
   id: string

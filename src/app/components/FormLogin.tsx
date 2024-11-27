@@ -83,7 +83,7 @@ export function FormLogin() {
         <Button>
           <span>login</span>
         </Button>
-        <Button asChild variant="secondary">
+        <Button asChild variantColor="secondary">
           <Link href="cadastro">cadastre-se</Link>
         </Button>
       </form>

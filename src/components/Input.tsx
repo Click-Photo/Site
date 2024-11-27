@@ -7,7 +7,8 @@ const input = tv({
   variants: {
     variant: {
       icon: 'pl-10 md:pl-14',
-      ghost: 'border-black border-2 bg-transparent border-solid text-black',
+      ghost:
+        'border-black border-2 bg-transparent border-solid text-black placeholder:text-gray-dark-click',
       'icon-white':
         'pl-10 md:pl-14 border-2 bg-gray-light-click border-solid text-black',
     },

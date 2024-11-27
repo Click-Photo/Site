@@ -3,12 +3,12 @@ import { FreeMode } from 'swiper/modules'
 import 'swiper/css'
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Photographer } from './FeedCardClient'
 import Link from 'next/link'
 import { Input } from './Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import { Photographer } from '@/data/photographers'
 
 interface PhotographersSearchProps {
   photographersList: Photographer[]
@@ -29,7 +29,7 @@ export function PhotographersSearch({
   return (
     <div className="w-full">
       <div className="mb-4 flex flex-col justify-between gap-2 md:flex-row md:items-center">
-        <h2 className="font-bold">Fotógrafos</h2>
+        <h2 className="text-2xl font-bold uppercase">Fotógrafos</h2>
         <Input
           className="w-full rounded-lg py-2 md:w-60 md:flex-none md:rounded-full"
           variant="icon-white"
