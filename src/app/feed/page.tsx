@@ -2,7 +2,7 @@
 
 import { FeedCardClient } from '@/components/FeedCardClient'
 import { FeedCardPhotographer } from '@/components/FeedCardPhotographer'
-import { NavbarUser } from '@/components/NavBarUser'
+import { NavbarUser } from '@/components/NavbarUser'
 import { PhotographersSearch } from '@/components/PhotographersSearch'
 import { useAuth } from '@/contexts/AuthContext'
 import { feedClient } from '@/data/feedPostsClient'

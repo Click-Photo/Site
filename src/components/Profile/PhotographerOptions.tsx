@@ -63,7 +63,7 @@ export function PhotographerOptions({
   ]
 
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex w-full max-w-96 items-center gap-8">
       <Tabs defaultValue="photos" className="w-full">
         <TabsList className="w-full justify-evenly bg-transparent font-secondary text-white">
           <TabsTrigger

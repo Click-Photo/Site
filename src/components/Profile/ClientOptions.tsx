@@ -95,7 +95,10 @@ export function ClientOptions({
         </span>
       </Link>
 
-      <div className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gray-light-click px-7 py-5 text-[#555555] transition-colors hover:bg-white hover:text-black">
+      <Link
+        href="/postar-job"
+        className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gray-light-click px-7 py-5 text-[#555555] transition-colors hover:bg-white hover:text-black"
+      >
         <div className="flex items-center gap-2 sm:gap-4">
           <FontAwesomeIcon icon={faPlus} className="text-xl sm:text-2xl" />
           <p className="text-lg font-bold uppercase leading-none sm:text-xl">
@@ -105,7 +108,7 @@ export function ClientOptions({
         <span className="flex gap-1 text-lg font-bold leading-none text-[#DB4949] group-hover:text-red-500 sm:text-xl">
           ver +
         </span>
-      </div>
+      </Link>
     </section>
   )
 }
