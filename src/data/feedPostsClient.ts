@@ -1,4 +1,4 @@
-import { FeedCardClientProps } from '@/components/FeedCardClient'
+import { FeedCardClientProps } from '@/components/CardArt'
 import { photographers } from './photographers'
 
 export const feedClient: FeedCardClientProps[] = [

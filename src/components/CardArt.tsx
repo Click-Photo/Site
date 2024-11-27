@@ -13,6 +13,7 @@ import {
 import { Button } from './ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Photographer } from '@/data/photographers'
+import Link from 'next/link'
 
 export interface FeedCardClientProps {
   id: string
@@ -22,7 +23,7 @@ export interface FeedCardClientProps {
   photographer: Photographer
 }
 
-export function FeedCardClient({
+export function CardArt({
   id,
   photo,
   title,
@@ -80,8 +81,8 @@ export function FeedCardClient({
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="w-full justify-center">
-              <Button className="w-full rounded-full uppercase">
-                Ver Perfil
+              <Button className="w-full rounded-full uppercase" asChild>
+                <Link href={`/fotografo/${photographer.id}`}>Ver Perfil</Link>
               </Button>
             </DialogFooter>
           </DialogContent>

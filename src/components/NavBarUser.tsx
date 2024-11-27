@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import logo from '@/assets/logo.svg'
 import Link from 'next/link'
@@ -44,6 +46,12 @@ export function NavbarUser({ name }: NavbarUserProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="font-secondary">
+            <DropdownMenuItem
+              className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
+              asChild
+            >
+              <Link href="/feed">Feed</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
               asChild

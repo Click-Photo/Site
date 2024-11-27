@@ -1,7 +1,7 @@
 'use client'
 
-import { FeedCardClient } from '@/components/FeedCardClient'
-import { FeedCardPhotographer } from '@/components/FeedCardPhotographer'
+import { CardArt } from '@/components/CardArt'
+import { CardJobFeed } from '@/components/CardJobFeed'
 import { NavbarUser } from '@/components/NavbarUser'
 import { PhotographersSearch } from '@/components/PhotographersSearch'
 import { useAuth } from '@/contexts/AuthContext'
@@ -25,7 +25,7 @@ export default function Feed() {
                 <h2 className="text-2xl font-bold uppercase">Artes</h2>
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {feedClient.map((post) => (
-                    <FeedCardClient
+                    <CardArt
                       key={post.id}
                       id={post.id}
                       photo={post.photo}
@@ -43,7 +43,7 @@ export default function Feed() {
               <h2 className="text-2xl font-bold uppercase">Jobs</h2>
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {feedPhothographer.map((job) => (
-                  <FeedCardPhotographer
+                  <CardJobFeed
                     key={job.id}
                     id={job.id}
                     title={job.title}

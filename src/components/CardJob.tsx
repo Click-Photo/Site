@@ -1,10 +1,14 @@
 'use client'
 
 import { Client } from '@/data/clients'
-import { ThumbsUp } from 'lucide-react'
 import { formatDate } from '@/utils/format-date'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleCheck,
+  faCircleXmark,
+  faClock,
+  faLocationDot,
+} from '@fortawesome/free-solid-svg-icons'
 import {
   Dialog,
   DialogContent,
@@ -17,9 +21,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './Button'
 import Link from 'next/link'
-import { Input } from './Input'
 
-export interface FeedCardPhotographerProps {
+export interface CardJobProps {
   id: string
   title: string
   date: Date
@@ -28,9 +31,10 @@ export interface FeedCardPhotographerProps {
   amountProporsals: number
   value: number
   client: Client
+  status: 'ACEITO' | 'CANCELADO' | 'PENDENTE'
 }
 
-export function FeedCardPhotographer({
+export function CardJob({
   id,
   title,
   date,
@@ -39,21 +43,41 @@ export function FeedCardPhotographer({
   description,
   value,
   client,
-}: FeedCardPhotographerProps) {
+  status,
+}: CardJobProps) {
   return (
     <div
       className="flex flex-col rounded-md bg-gray-light-click text-black"
       key={id}
     >
-      <div className="flex items-center justify-between rounded-t-lg bg-white p-3 font-secondary">
+      <div className="flex items-center justify-between rounded-t-lg bg-white p-3 font-secondary md:p-6">
         <div className="flex flex-col gap-1">
           <p className="text-sm font-bold uppercase">{formatDate(date)}</p>
           <p className="truncate text-lg font-bold uppercase">{title}</p>
         </div>
-        <Button className="group flex-col rounded-lg border border-none bg-transparent p-3 text-xs normal-case hover:bg-black-click hover:text-white focus:bg-black-click focus:text-white md:text-sm">
-          <ThumbsUp />
-          Interesse
-        </Button>
+        <div>
+          {status === 'ACEITO' && (
+            <FontAwesomeIcon
+              icon={faCircleCheck}
+              color="#0B7E40"
+              className="h-8 w-8"
+            />
+          )}
+          {status === 'CANCELADO' && (
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              color="#7E0B20"
+              className="h-8 w-8"
+            />
+          )}
+          {status === 'PENDENTE' && (
+            <FontAwesomeIcon
+              icon={faClock}
+              color="#5F5F5F"
+              className="h-8 w-8"
+            />
+          )}
+        </div>
       </div>
       <div className="flex flex-col gap-4 p-3">
         <div className="flex items-center justify-between font-secondary">
@@ -76,14 +100,15 @@ export function FeedCardPhotographer({
               </Button>
             </DialogTrigger>
             <DialogContent className="font-secondary text-black">
-              <DialogHeader className="p-6">
-                <DialogTitle asChild>
+              <DialogHeader className="px-6 pb-6 pt-9">
+                <DialogTitle className="flex justify-between">
                   <div className="flex flex-col gap-1">
                     <p className="text-xs font-light uppercase">Data do Job</p>
                     <p className="text-sm font-bold uppercase">
                       {formatDate(date)}
                     </p>
                   </div>
+                  <p className="text-lg font-bold">{status}</p>
                 </DialogTitle>
                 <DialogDescription className="flex flex-col gap-4 text-left text-black">
                   <h3 className="mt-2 text-xl font-black uppercase">{title}</h3>
@@ -109,20 +134,15 @@ export function FeedCardPhotographer({
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter className="w-full flex-col gap-5 rounded-b-2xl bg-white p-6">
-                <div className="flex flex-col justify-between">
-                  <p className="text-lg font-bold">Preço:</p>
-                  <Input
-                    variant="ghost"
-                    className="md:md-max h-max w-full py-2"
-                    type="number"
-                    placeholder={`R$ ${value}`}
-                  />
+                <div className="flex flex-col font-primary text-2xl">
+                  <p className="font-bold">Preço:</p>
+                  R$ {value}
                 </div>
                 <Button
                   className="mx-auto w-max rounded-full uppercase"
                   variantColor="tertiary"
                 >
-                  Fazer Proposta
+                  Cancelar
                 </Button>
               </DialogFooter>
             </DialogContent>
