@@ -21,6 +21,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './Button'
 import Link from 'next/link'
+import { useDefaultUser } from '@/data/defaultUser'
 
 export interface CardJobProps {
   id: string
@@ -45,9 +46,11 @@ export function CardJob({
   client,
   status,
 }: CardJobProps) {
+  const { role } = useDefaultUser()
+
   return (
     <div
-      className="flex flex-col rounded-md bg-gray-light-click text-black"
+      className="flex flex-col rounded-lg bg-gray-light-click text-black"
       key={id}
     >
       <div className="flex items-center justify-between rounded-t-lg bg-white p-3 font-secondary md:p-6">
@@ -92,7 +95,13 @@ export function CardJob({
         </div>
         <p className="truncate text-justify">{description}</p>
         <div className="flex items-center justify-between gap-4">
-          <p className="font-secondary text-xl font-bold">R$ {value}</p>
+          <p className="font-secondary text-xl font-bold">
+            {value.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+              maximumFractionDigits: 2,
+            })}
+          </p>
           <Dialog>
             <DialogTrigger asChild>
               <Button variantColor="tertiary" className="px-8">
@@ -112,20 +121,22 @@ export function CardJob({
                 </DialogTitle>
                 <DialogDescription className="flex flex-col gap-4 text-left text-black">
                   <h3 className="mt-2 text-xl font-black uppercase">{title}</h3>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Avatar>
-                        <AvatarImage src={client.photo} />
-                        <AvatarFallback>
-                          {client.name.substring(0, 1)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-base">{client.name}</span>
+                  {role === 'fotografo' && (
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Avatar>
+                          <AvatarImage src={client.photo} />
+                          <AvatarFallback>
+                            {client.name.substring(0, 1)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="text-base">{client.name}</span>
+                      </div>
+                      <Button asChild variantColor="tertiary" className="px-6">
+                        <Link href={`/cliente/${id}`}>Ver</Link>
+                      </Button>
                     </div>
-                    <Button asChild variantColor="tertiary" className="px-6">
-                      <Link href={`/cliente/${id}`}>Ver</Link>
-                    </Button>
-                  </div>
+                  )}
                   <p className="font-primary text-base">{description}</p>
                   <div className="flex flex-col gap-2">
                     <p className="text-lg font-bold">Local</p>
@@ -136,14 +147,31 @@ export function CardJob({
               <DialogFooter className="w-full flex-col gap-5 rounded-b-2xl bg-white p-6">
                 <div className="flex flex-col font-primary text-2xl">
                   <p className="font-bold">Preço:</p>
-                  R$ {value}
+                  {value.toLocaleString('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    maximumFractionDigits: 2,
+                  })}
                 </div>
-                <Button
-                  className="mx-auto w-max rounded-full uppercase"
-                  variantColor="tertiary"
-                >
-                  Cancelar
-                </Button>
+                {role === 'fotografo' && (
+                  <Button
+                    className="mx-auto w-max rounded-full uppercase"
+                    variantColor="tertiary"
+                  >
+                    Cancelar
+                  </Button>
+                )}
+                {role === 'cliente' && (
+                  <Button
+                    className="mx-auto w-max rounded-full uppercase"
+                    variantColor="tertiary"
+                    asChild
+                  >
+                    <Link href={`/meus-jobs/${id}/propostas`}>
+                      {amountProporsals} propostas
+                    </Link>
+                  </Button>
+                )}
               </DialogFooter>
             </DialogContent>
           </Dialog>

@@ -1,6 +1,13 @@
 import { Client, clients } from './clients'
+import { Photographer, photographers } from './photographers'
+import {
+  Proporsal,
+  proporsalsJob1,
+  proporsalsJob2,
+  proporsalsJob3,
+} from './proporsals'
 
-interface JobPhotographer {
+interface Job {
   id: string
   title: string
   date: Date
@@ -10,9 +17,11 @@ interface JobPhotographer {
   value: number
   client: Client
   status: 'ACEITO' | 'CANCELADO' | 'PENDENTE'
+  photographer: Photographer
+  proporsals: Proporsal[]
 }
 
-export const jobsPhotographer: JobPhotographer[] = [
+export const jobs: Job[] = [
   {
     id: '1',
     title: 'Job 5',
@@ -24,6 +33,8 @@ export const jobsPhotographer: JobPhotographer[] = [
     value: 4500,
     client: clients[0],
     status: 'PENDENTE',
+    photographer: photographers[0],
+    proporsals: proporsalsJob1,
   },
   {
     id: '2',
@@ -36,6 +47,8 @@ export const jobsPhotographer: JobPhotographer[] = [
     value: 5500,
     client: clients[1],
     status: 'ACEITO',
+    photographer: photographers[1],
+    proporsals: proporsalsJob2,
   },
   {
     id: '3',
@@ -48,5 +61,7 @@ export const jobsPhotographer: JobPhotographer[] = [
     value: 6500,
     client: clients[1],
     status: 'CANCELADO',
+    photographer: photographers[1],
+    proporsals: proporsalsJob3,
   },
 ]

@@ -32,7 +32,7 @@ export function CardArt({
 }: FeedCardClientProps) {
   return (
     <div
-      className="flex flex-col gap-2 rounded-md bg-gray-light-click p-4 text-black"
+      className="flex flex-col gap-2 rounded-lg bg-gray-light-click p-4 text-black"
       key={id}
     >
       <Image
@@ -40,7 +40,7 @@ export function CardArt({
         height={1280}
         src={photo}
         alt={`Foto tirada por ${photographer.name}`}
-        className="aspect-square rounded-md object-cover"
+        className="aspect-square rounded-lg object-cover"
       />
       <h3 className="text-lg font-bold">{title}</h3>
       <div className="flex items-center justify-between">

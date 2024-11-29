@@ -1,7 +1,7 @@
-import { CardJobProps } from '@/components/CardJobFeed'
+import { CardJobFeedProps } from '@/components/CardJobFeed'
 import { clients } from './clients'
 
-export const feedPhothographer: CardJobProps[] = [
+export const feedPhothographer: CardJobFeedProps[] = [
   {
     id: '1',
     title: 'Job 1',

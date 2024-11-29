@@ -75,7 +75,13 @@ export function CardJobFeed({
         </div>
         <p className="truncate text-justify">{description}</p>
         <div className="flex items-center justify-between gap-4">
-          <p className="font-secondary text-xl font-bold">R$ {value}</p>
+          <p className="font-secondary text-xl font-bold">
+            {value.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+              maximumFractionDigits: 2,
+            })}
+          </p>
           <Dialog>
             <DialogTrigger asChild>
               <Button variantColor="tertiary" className="px-8">
@@ -122,7 +128,11 @@ export function CardJobFeed({
                     variant="ghost"
                     className="md:md-max h-max w-full py-2"
                     type="number"
-                    placeholder={`R$ ${value}`}
+                    placeholder={`${value.toLocaleString('pt-br', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      maximumFractionDigits: 2,
+                    })}`}
                   />
                 </div>
                 <Button
