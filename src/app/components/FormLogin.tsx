@@ -12,8 +12,21 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoginFormSchema, loginFormSchema } from '@/schema/loginFormSchema'
 import Link from 'next/link'
+import { fetchAuthentication } from '@/hooks/useAuthenticate'
+import { useState } from 'react'
+import { MessageError } from '@/components/MessageError'
+import { Loading } from '@/components/Loading'
+import { useRouter } from 'next/navigation'
+import { Role } from '@/@types/roleEnum'
 
 export function FormLogin() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [messageError, setMessageError] = useState<string | undefined>(
+    undefined,
+  )
+
+  const router = useRouter()
+
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
   })
@@ -24,69 +37,91 @@ export function FormLogin() {
     formState: { errors },
   } = form
 
-  function handleLoginData(data: LoginFormSchema) {
-    console.log(JSON.stringify(data, null, 2))
+  async function useHandleLoginData(body: LoginFormSchema) {
+    setIsLoading(true)
+    setMessageError(undefined)
+
+    await fetchAuthentication(body)
+      .then(({ message }) => {
+        if (message.auth === false) {
+          setMessageError(message.message)
+        } else {
+          if (message.role === Role.admin) {
+            console.log(message)
+          } else {
+            router.push('/feed')
+          }
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="mt-4 flex w-full max-w-80 flex-col gap-8"
-        onSubmit={handleSubmit(handleLoginData)}
-      >
-        <FormField
-          control={control}
-          name="email"
-          render={({ field }) => (
-            <Field>
-              <FormControl>
-                <Input
-                  variant="icon"
-                  icon={<FontAwesomeIcon icon={faUser} className="text-lg" />}
-                  placeholder="E-mail"
-                  type="text"
-                  {...field}
-                />
-              </FormControl>
-              {errors.email && (
-                <FormMessage>{errors.email.message}</FormMessage>
-              )}
-            </Field>
-          )}
-        />
-        <FormField
-          control={control}
-          name="password"
-          render={({ field }) => (
-            <Field>
-              <FormControl>
-                <Input
-                  variant="icon"
-                  icon={<FontAwesomeIcon icon={faLock} className="text-lg" />}
-                  placeholder="Senha"
-                  type="password"
-                  {...field}
-                />
-              </FormControl>
-              {errors.password && (
-                <FormMessage>{errors.password.message}</FormMessage>
-              )}
-            </Field>
-          )}
-        />
-        <a
-          className="self-end text-base text-gray-light-click underline underline-offset-2 transition-all hover:text-white hover:underline-offset-4"
-          href="esqueceu-a-senha"
+    <>
+      {messageError && <MessageError message={messageError} />}
+      {isLoading && <Loading />}
+      <Form {...form}>
+        <form
+          className="mt-4 flex w-full max-w-80 flex-col gap-8"
+          onSubmit={handleSubmit(useHandleLoginData)}
         >
-          Esqueceu a senha?
-        </a>
-        <Button>
-          <span>login</span>
-        </Button>
-        <Button asChild variantColor="secondary">
-          <Link href="cadastro">cadastre-se</Link>
-        </Button>
-      </form>
-    </Form>
+          <FormField
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <Field>
+                <FormControl>
+                  <Input
+                    variant="icon"
+                    icon={<FontAwesomeIcon icon={faUser} className="text-lg" />}
+                    placeholder="E-mail"
+                    type="text"
+                    {...field}
+                  />
+                </FormControl>
+                {errors.email && (
+                  <FormMessage>{errors.email.message}</FormMessage>
+                )}
+              </Field>
+            )}
+          />
+          <FormField
+            control={control}
+            name="senha"
+            render={({ field }) => (
+              <Field>
+                <FormControl>
+                  <Input
+                    variant="icon"
+                    className="pr-10 md:pr-14"
+                    icon={<FontAwesomeIcon icon={faLock} className="text-lg" />}
+                    placeholder="Senha"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                {errors.senha && (
+                  <FormMessage>{errors.senha.message}</FormMessage>
+                )}
+              </Field>
+            )}
+          />
+          <a
+            className="self-end text-base text-gray-light-click underline underline-offset-2 transition-all hover:text-white hover:underline-offset-4"
+            href="esqueceu-a-senha"
+          >
+            Esqueceu a senha?
+          </a>
+          <Button type="submit">
+            <span>login</span>
+          </Button>
+          <Button asChild variantColor="secondary">
+            <Link href="cadastro">cadastre-se</Link>
+          </Button>
+        </form>
+      </Form>
+    </>
   )
 }

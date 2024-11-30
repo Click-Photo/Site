@@ -1,36 +1,36 @@
 'use client'
 
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useState } from 'react'
+import { UserToken } from '@/@types/UserToken'
 
 interface AuthProviderProps {
   children: ReactNode
 }
 
-export interface AuthContextType {
-  id: string
-  role: 'admin' | 'fotografo' | 'cliente'
+interface AuthContextType {
+  user: UserToken | null
+  token: string | null
+  createUser: (tokuseren: UserToken | null) => void
+  createToken: (token: string | null) => void
 }
 
-const defaultUser: AuthContextType = {
-  id: 'cd1b197d-e7f2-4ae1-a95a-7b44ce3f189a',
-  role: 'cliente',
-}
-
-export const AuthContext = createContext(defaultUser as AuthContextType)
+export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const { id, role } = useContext(AuthContext)
+  const [token, setToken] = useState<string | null>(null)
+  const [user, setUser] = useState<UserToken | null>(null)
+
+  function createToken(token: string | null) {
+    setToken(token)
+  }
+
+  function createUser(user: UserToken | null) {
+    setUser(user)
+  }
 
   return (
-    <AuthContext.Provider value={{ id, role }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, createUser, token, createToken }}>
+      {children}
+    </AuthContext.Provider>
   )
-}
-
-export function useAuth() {
-  const { id, role } = useContext(AuthContext)
-
-  return {
-    id,
-    role,
-  }
 }

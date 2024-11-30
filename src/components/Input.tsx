@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { Input as InputUI, InputProps as InputPropsUI } from './ui/input'
 
 import { tv, type VariantProps } from 'tailwind-variants'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 const input = tv({
-  base: 'flex-1 rounded-full border-none text-base h-max px-4 py-4 bg-gray-dark-click transition-all focus-visible:ring-gray-light-click focus-visible:ring-transparent focus-visible:ring-offset-2 placeholder:text-gray-light-click/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+  base: 'flex-1 z-1 rounded-full border-none text-base h-max px-4 py-4 bg-gray-dark-click transition-all focus-visible:ring-gray-light-click focus-visible:ring-transparent focus-visible:ring-offset-2 placeholder:text-gray-light-click/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
   variants: {
     variant: {
       icon: 'pl-10 md:pl-14',
@@ -22,7 +25,22 @@ type InputProps = InputPropsUI &
     icon?: JSX.Element
   }
 
-export function Input({ className, variant, icon, ...rest }: InputProps) {
+export function Input({
+  className,
+  variant,
+  type: defaultType,
+  icon,
+  ...rest
+}: InputProps) {
+  const [type, setType] = useState(defaultType)
+
+  const isPassword = defaultType === 'password'
+
+  function changeTypePasswordToText() {
+    type === 'text' && setType('password')
+    type === 'password' && setType('text')
+  }
+
   return (
     <>
       <div className="relative flex h-max items-center">
@@ -31,7 +49,20 @@ export function Input({ className, variant, icon, ...rest }: InputProps) {
             {icon}
           </div>
         )}
-        <InputUI className={input({ variant, className })} {...rest} />
+        <InputUI
+          className={input({ variant, className })}
+          type={type}
+          {...rest}
+        />
+        {isPassword && (
+          <div
+            className="absolute right-4 z-10 h-max w-max cursor-pointer md:right-6"
+            onClick={() => changeTypePasswordToText()}
+          >
+            {type === 'password' && <FontAwesomeIcon icon={faEye} />}
+            {type === 'text' && <FontAwesomeIcon icon={faEyeSlash} />}
+          </div>
+        )}
       </div>
     </>
   )

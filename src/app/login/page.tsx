@@ -3,7 +3,7 @@ import logo from '@/assets/logo.svg'
 import { FormLogin } from '../components/FormLogin'
 import shapeLogin from '@/assets/shape-login.png'
 
-export default function Home() {
+export default function Login() {
   return (
     <section className="relative flex h-screen w-screen flex-col items-center justify-center gap-4 px-6">
       <Image
