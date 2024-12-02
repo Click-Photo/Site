@@ -13,19 +13,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LoginFormSchema, loginFormSchema } from '@/schema/loginFormSchema'
 import Link from 'next/link'
 import { fetchAuthentication } from '@/hooks/useAuthenticate'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { MessageError } from '@/components/MessageError'
 import { Loading } from '@/components/Loading'
+
+import { jwtDecode } from 'jwt-decode'
+import { AuthContext } from '@/contexts/AuthContext'
+import { UserToken } from '@/@types/UserToken'
 import { useRouter } from 'next/navigation'
-import { Role } from '@/@types/roleEnum'
 
 export function FormLogin() {
   const [isLoading, setIsLoading] = useState(false)
   const [messageError, setMessageError] = useState<string | undefined>(
     undefined,
   )
-
-  const router = useRouter()
 
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
@@ -37,6 +38,10 @@ export function FormLogin() {
     formState: { errors },
   } = form
 
+  const { createToken, createUser } = useContext(AuthContext)
+
+  const router = useRouter()
+
   async function useHandleLoginData(body: LoginFormSchema) {
     setIsLoading(true)
     setMessageError(undefined)
@@ -46,8 +51,13 @@ export function FormLogin() {
         if (message.auth === false) {
           setMessageError(message.message)
         } else {
-          if (message.role === Role.admin) {
-            console.log(message)
+          const userDecoded = jwtDecode<UserToken>(message.token)
+
+          createUser(userDecoded)
+          createToken(message.token)
+
+          if (userDecoded.role === 'admin') {
+            router.push('/admin')
           } else {
             router.push('/feed')
           }

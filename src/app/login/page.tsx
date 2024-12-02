@@ -1,9 +1,26 @@
+'use client'
+
 import Image from 'next/image'
 import logo from '@/assets/logo.svg'
 import { FormLogin } from '../components/FormLogin'
 import shapeLogin from '@/assets/shape-login.png'
+import { useContext } from 'react'
+import { AuthContext } from '@/contexts/AuthContext'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
+  const { token, user } = useContext(AuthContext)
+
+  const router = useRouter()
+
+  if (token || user) {
+    if (user?.role !== 'admin') {
+      return router.push('/feed')
+    } else {
+      return router.push('/admin')
+    }
+  }
+
   return (
     <section className="relative flex h-screen w-screen flex-col items-center justify-center gap-4 px-6">
       <Image

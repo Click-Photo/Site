@@ -1,65 +1,114 @@
 'use client'
 
+import { Loading } from '@/components/Loading'
+import { MessageError } from '@/components/MessageError'
 import { NavbarUser } from '@/components/NavbarUser'
 import { ClientOptions } from '@/components/Profile/ClientOptions'
 import { PhotographerOptions } from '@/components/Profile/PhotographerOptions'
 import { StarRating } from '@/components/StarRating'
-import { useDefaultUser } from '@/data/defaultUser'
-import Image from 'next/image'
+import { AuthContext } from '@/contexts/AuthContext'
+import { useAverageUser } from '@/hooks/useAverageUser'
+import { usePorfolioPhotographer } from '@/hooks/usePorfoltioPhotographer'
+import { useUser } from '@/hooks/useUser'
+import { useRouter } from 'next/navigation'
+import { useContext } from 'react'
 
 export default function Profile() {
-  const { name, imageUrl, amountJobs, role, email, telephone, cep, cpf } =
-    useDefaultUser()
+  const { token, user, logout } = useContext(AuthContext)
+
+  const router = useRouter()
+
+  if (!token || !user) {
+    return router.push('/login')
+  }
+
+  if (user?.role === 'admin') {
+    return router.push('/admin')
+  }
+
+  const {
+    data: userFetched,
+    isLoading: isLoadingUser,
+    isError: isErrorUser,
+    error: errorUser,
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = useUser(user.id, user.role)
+
+  const {
+    data: portfolio,
+    isLoading: isLoadingPortfolio,
+    isError: isErrorPortfolio,
+    error: errorPortfolio,
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = usePorfolioPhotographer(user.id, user.role)
+
+  const {
+    data: average,
+    isLoading: isLoadingAverage,
+    isError: isErrorAverage,
+    error: errorAverage,
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+  } = useAverageUser(user.id, user.role)
+
+  if (
+    errorUser?.status === 401 ||
+    errorPortfolio?.status === 401 ||
+    errorAverage?.status === 401
+  ) {
+    logout()
+    router.push('/login')
+  }
 
   return (
     <>
-      <NavbarUser name={name} />
-      <section className="w-screen px-6 py-9">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
-          <div className="flex flex-col gap-4">
-            <Image
-              src={imageUrl}
-              width={1280}
-              height={1280}
-              alt="Imagem de Perfil"
-              className="h-28 w-28 self-center rounded-2xl object-cover object-center"
-            />
-            <h1 className="self-center text-white">{name}</h1>
-          </div>
-
-          <div className="flex w-full max-w-96 items-center justify-evenly">
-            <div className="flex w-full flex-col items-center gap-1 font-secondary text-white sm:w-28">
-              <span className="text-xl font-bold">{amountJobs}</span>
-              <p className="text-sm">Jobs</p>
+      {isLoadingUser || isLoadingPortfolio || (isLoadingAverage && <Loading />)}
+      {isErrorUser && <MessageError message={errorUser.message} />}
+      {isErrorPortfolio && <MessageError message={errorPortfolio.message} />}
+      {isErrorAverage && <MessageError message={errorAverage.message} />}
+      <NavbarUser />
+      {userFetched && (
+        <section className="flex min-h-[calc(100vh-6rem)] w-screen items-center px-6 py-12">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
+            <div className="flex flex-col gap-4">
+              <h1 className="self-center font-secondary text-xl font-bold text-white">
+                {userFetched.nome}
+              </h1>
             </div>
-            <div className="h-16 w-[1px] bg-white" />
-            <div className="flex w-full flex-col items-center gap-1 text-[#F8B84E] sm:w-28">
-              <span className="font-secondary">({32})</span>
-              <StarRating score={4.5} />
+
+            <div className="flex w-full max-w-96 items-center justify-evenly">
+              <div className="flex w-full flex-col items-center gap-1 text-[#F8B84E] sm:w-28">
+                <p className="text-sm">{average?.mediaNota}</p>
+                <StarRating score={average!.totalAvaliacoes} />
+              </div>
             </div>
+
+            {user.role === 'fotografo' && (
+              <PhotographerOptions
+                nome={userFetched.nome}
+                email={userFetched.email}
+                telefone={userFetched.telefone}
+                CEP={userFetched.CEP}
+                CPF={userFetched.CPF}
+                id={userFetched.id}
+                role={userFetched.role}
+                portfolio={portfolio}
+              />
+            )}
+
+            {user.role === 'cliente' && (
+              <ClientOptions
+                nome={userFetched.nome}
+                email={userFetched.email}
+                telefone={userFetched.telefone}
+                CEP={userFetched.CEP}
+                CPF={userFetched.CPF}
+                id={userFetched.id}
+                role={userFetched.role}
+              />
+            )}
           </div>
-
-          {role === 'fotografo' && (
-            <PhotographerOptions
-              name={name}
-              email={email}
-              telephone={telephone}
-              cep={cep}
-              cpf={cpf}
-            />
-          )}
-
-          {role === 'cliente' && (
-            <ClientOptions
-              name={name}
-              email={email}
-              telephone={telephone}
-              cep={cep}
-              cpf={cpf}
-            />
-          )}
-        </div>
-      </section>
+        </section>
+      )}
     </>
   )
 }

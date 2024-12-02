@@ -1,6 +1,5 @@
 'use client'
 
-import { Client } from '@/data/clients'
 import { ThumbsUp } from 'lucide-react'
 import { formatDate } from '@/utils/format-date'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,34 +13,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './Button'
 import Link from 'next/link'
 import { Input } from './Input'
 import { cn } from '@/lib/utils'
+import { JobData } from '@/@types/jobData'
 
-export interface CardJobFeedProps {
-  id: string
-  title: string
-  date: Date
-  address: string
-  description: string
-  amountProporsals: number
-  value: number
-  client: Client
-  isInterested?: true
-}
+export interface CardJobFeedProps extends JobData {}
 
 export function CardJobFeed({
   id,
-  title,
-  date,
-  address,
-  amountProporsals,
-  description,
-  value,
-  client,
-  isInterested,
+  titulo,
+  descricao,
+  local,
+  dataJob,
+  preco,
 }: CardJobFeedProps) {
   return (
     <div
@@ -50,15 +36,15 @@ export function CardJobFeed({
     >
       <div className="flex items-center justify-between rounded-t-lg bg-white p-3 font-secondary">
         <div className="flex flex-col gap-1">
-          <p className="text-sm font-bold uppercase">{formatDate(date)}</p>
-          <p className="truncate text-lg font-bold uppercase">{title}</p>
+          <p className="text-sm font-bold uppercase">{formatDate(dataJob)}</p>
+          <p className="truncate text-lg font-bold uppercase">{titulo}</p>
         </div>
         <Button
           className={cn(
             'group flex-col rounded-lg border-none bg-transparent p-3 text-xs normal-case hover:bg-black-click hover:text-white focus:bg-black-click focus:text-white md:text-sm',
           )}
         >
-          <ThumbsUp fill={isInterested && 'black'} />
+          <ThumbsUp />
           Interesse
         </Button>
       </div>
@@ -66,17 +52,13 @@ export function CardJobFeed({
         <div className="flex items-center justify-between font-secondary">
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faLocationDot} size="xl" />
-            <p className="font-bold uppercase">{address}</p>
-          </div>
-          <div className="flex flex-col items-center gap-1 text-xs font-bold uppercase md:text-sm">
-            <span>{amountProporsals}</span>
-            <p>Propostas</p>
+            <p className="font-bold uppercase">{local}</p>
           </div>
         </div>
-        <p className="truncate text-justify">{description}</p>
+        <p className="truncate text-justify">{descricao}</p>
         <div className="flex items-center justify-between gap-4">
           <p className="font-secondary text-xl font-bold">
-            {value.toLocaleString('pt-br', {
+            {preco.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
               maximumFractionDigits: 2,
@@ -94,30 +76,23 @@ export function CardJobFeed({
                   <div className="flex flex-col gap-1">
                     <p className="text-xs font-light uppercase">Data do Job</p>
                     <p className="text-sm font-bold uppercase">
-                      {formatDate(date)}
+                      {formatDate(dataJob)}
                     </p>
                   </div>
                 </DialogTitle>
                 <DialogDescription className="flex flex-col gap-4 text-left text-black">
-                  <h3 className="mt-2 text-xl font-black uppercase">{title}</h3>
+                  <h3 className="mt-2 text-xl font-black uppercase">
+                    {titulo}
+                  </h3>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Avatar>
-                        <AvatarImage src={client.photo} />
-                        <AvatarFallback>
-                          {client.name.substring(0, 1)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-base">{client.name}</span>
-                    </div>
                     <Button asChild variantColor="tertiary" className="px-6">
-                      <Link href={`/cliente/${id}`}>Ver</Link>
+                      <Link href={`/cliente/${id}`}>Ver Cliente</Link>
                     </Button>
                   </div>
-                  <p className="font-primary text-base">{description}</p>
+                  <p className="font-primary text-base">{descricao}</p>
                   <div className="flex flex-col gap-2">
                     <p className="text-lg font-bold">Local</p>
-                    <p className="text-base">{address}</p>
+                    <p className="text-base">{local}</p>
                   </div>
                 </DialogDescription>
               </DialogHeader>
@@ -128,7 +103,7 @@ export function CardJobFeed({
                     variant="ghost"
                     className="md:md-max h-max w-full py-2"
                     type="number"
-                    placeholder={`${value.toLocaleString('pt-br', {
+                    placeholder={`${preco.toLocaleString('pt-br', {
                       style: 'currency',
                       currency: 'BRL',
                       maximumFractionDigits: 2,

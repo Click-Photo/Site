@@ -4,6 +4,7 @@ interface AuthMessage {
   auth: boolean
   message: string
   role?: Role
+  token: string
 }
 
 export interface AuthData {

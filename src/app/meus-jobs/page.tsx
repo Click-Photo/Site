@@ -2,15 +2,12 @@
 
 import { CardJob } from '@/components/CardJob'
 import { NavbarUser } from '@/components/NavbarUser'
-import { useDefaultUser } from '@/data/defaultUser'
 import { jobs } from '@/data/jobs'
 
 export default function MyJobs() {
-  const { name } = useDefaultUser()
-
   return (
     <>
-      <NavbarUser name={name} />
+      <NavbarUser />
       <section className="w-screen p-6">
         <div className="mx-auto w-full max-w-7xl">
           <div className="flex flex-col gap-4">

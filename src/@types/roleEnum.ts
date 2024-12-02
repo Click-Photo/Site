@@ -1,5 +1,1 @@
-export enum Role {
-  'cliente',
-  'fotografo',
-  'admin',
-}
+export type Role = 'cliente' | 'fotografo' | 'admin'

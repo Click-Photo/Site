@@ -11,24 +11,19 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import { UpdateProfile } from './UpdateProfile'
+import { UserData } from '@/@types/userData'
 
-interface ClientOptionsProps {
-  name: string
-  email: string
-  telephone: string
-  cep: string
-  cpf: string
-}
+interface ClientOptionsProps extends UserData {}
 
 export function ClientOptions({
-  name,
+  nome,
   email,
-  telephone,
-  cep,
-  cpf,
+  telefone,
+  CEP,
+  CPF,
 }: ClientOptionsProps) {
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex w-full max-w-96 flex-col gap-6">
       <Dialog>
         <DialogTrigger className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gray-light-click px-7 py-5 text-[#555555] transition-colors hover:bg-white hover:text-black">
           <div className="flex items-center gap-2 sm:gap-4">
@@ -50,7 +45,7 @@ export function ClientOptions({
           <DialogDescription className="flex flex-col gap-6 px-9 py-8 pt-0 text-black-click">
             <div className="flex flex-col gap-1">
               <p className="text-lg font-bold uppercase">Nome:</p>
-              <p className="text-base">{name}</p>
+              <p className="text-base">{nome}</p>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-lg font-bold uppercase">Email:</p>
@@ -58,23 +53,23 @@ export function ClientOptions({
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-lg font-bold uppercase">Telefone:</p>
-              <p className="text-base">{telephone}</p>
+              <p className="text-base">{telefone}</p>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-lg font-bold uppercase">CEP:</p>
-              <p className="text-base">{cep}</p>
+              <p className="text-base">{CEP}</p>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-lg font-bold uppercase">CPF:</p>
-              <p className="text-base">{cpf}</p>
+              <p className="text-base">{CPF}</p>
             </div>
           </DialogDescription>
           <DialogFooter className="items-center justify-center rounded-b-2xl bg-white p-6">
             <UpdateProfile
-              name={name}
+              name={nome}
               email={email}
-              telephone={telephone}
-              cep={cep}
+              telephone={telefone}
+              cep={CEP}
             />
           </DialogFooter>
         </DialogContent>

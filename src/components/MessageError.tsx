@@ -13,7 +13,7 @@ export function MessageError({ message }: MessageErrorProps) {
     return (
       <div
         className={cn(
-          'fixed top-8 rounded-lg bg-red-500 px-8 py-4 text-white transition-all',
+          'fixed left-1/2 right-1/2 top-8 w-max -translate-x-1/2 rounded-lg bg-red-500 px-8 py-4 text-white transition-all',
         )}
       >
         <p className="text-sm">{message}</p>
