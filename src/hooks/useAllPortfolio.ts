@@ -17,7 +17,6 @@ export function useAllPortfolio(role: Role) {
     queryKey: ['portfolioList'],
     queryFn: async () => await fetch(role),
     retry: false,
-    enabled: role === 'cliente' || role === 'admin',
   })
 
   return query

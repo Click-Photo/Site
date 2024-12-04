@@ -17,7 +17,6 @@ export function usePhotographers(role: Role) {
     queryKey: ['photographersList'],
     queryFn: async () => await fetch(role),
     retry: false,
-    enabled: role === 'cliente' || role === 'admin',
   })
 
   return query

@@ -58,8 +58,10 @@ export function FormLogin() {
 
           if (userDecoded.role === 'admin') {
             router.push('/admin')
-          } else {
+          } else if (userDecoded.role === 'cliente') {
             router.push('/feed')
+          } else {
+            router.push('/jobs')
           }
         }
       })

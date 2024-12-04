@@ -16,7 +16,6 @@ import {
 import { Button } from './Button'
 import Link from 'next/link'
 import { Input } from './Input'
-import { JobData } from '@/@types/jobData'
 import { useForm } from 'react-hook-form'
 import {
   registerProporsalFormSchema,
@@ -32,18 +31,21 @@ import { Loading } from './Loading'
 import { MessageError } from './MessageError'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
-import { fetchPostInterestJob } from '@/hooks/usePostInterest'
+import { InterestData } from '@/@types/interestData'
 
-export interface CardJobFeedProps extends JobData {}
+type CardJobInterestProps = InterestData & {
+  isInterested?: boolean
+}
 
-export function CardJobFeed({
+export function CardJobInterest({
   id,
+  idCliente,
   titulo,
   descricao,
   local,
   dataJob,
   preco,
-}: CardJobFeedProps) {
+}: CardJobInterestProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [messageError, setMessageError] = useState<string | undefined>(
     undefined,
@@ -73,30 +75,13 @@ export function CardJobFeed({
     setMessageError(undefined)
 
     await fetchPostProporsalJob(id, {
+      idCliente,
       idFotografo: user!.id,
       valorProposta,
     })
       .then((response) => {
         if (response.status === 201) {
           router.refresh()
-        }
-      })
-      .catch((error: AxiosError) => {
-        setMessageError(error.message)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
-
-  async function useHandleRegisterInterest() {
-    setIsLoading(false)
-    setMessageError(undefined)
-
-    await fetchPostInterestJob(id, { idFotografo: user!.id })
-      .then((response) => {
-        if (response.status === 201) {
-          router.push('/interesses')
         }
       })
       .catch((error: AxiosError) => {
@@ -122,14 +107,9 @@ export function CardJobFeed({
               {titulo}
             </p>
           </div>
-          <Button
-            className="group flex-col rounded-lg border-none bg-transparent p-3 text-xs normal-case hover:bg-black-click hover:text-white focus:bg-black-click focus:text-white md:text-sm"
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            onClick={() => useHandleRegisterInterest()}
-          >
+          <div className="group flex flex-col items-center gap-1 rounded-lg border-none bg-black-click p-3 text-xs normal-case text-white md:text-sm">
             <ThumbsUp />
-            Interesse
-          </Button>
+          </div>
         </div>
         <div className="flex flex-col gap-4 p-3">
           <div className="flex items-center justify-between font-secondary">

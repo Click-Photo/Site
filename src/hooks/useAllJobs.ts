@@ -17,7 +17,6 @@ export function useAllJobs(role: Role) {
     queryKey: ['jobsList'],
     queryFn: async () => await fetch(role),
     retry: false,
-    enabled: role === 'admin' || role === 'fotografo',
   })
 
   return query

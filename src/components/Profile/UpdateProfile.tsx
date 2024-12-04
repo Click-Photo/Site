@@ -18,7 +18,13 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { fetchUpdateUser } from '@/hooks/useUpdateUser'
-import { Form, FormControl, FormField, FormMessage } from '../ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+} from '../ui/form'
 import { Field } from '../Field'
 import { Loading } from '../Loading'
 import { MessageError } from '../MessageError'
@@ -65,7 +71,7 @@ export function UpdateProfile({
 
     await fetchUpdateUser(body, user!.id, user!.role)
       .then((response) => {
-        if (response?.status === 200) router.push('/feed')
+        if (response?.status === 200) return router.push('/feed')
         else if (response?.status === 500) router.refresh()
       })
       .catch((error: AxiosError) => {
@@ -106,9 +112,9 @@ export function UpdateProfile({
                     name="nome"
                     render={({ field }) => (
                       <Field className="flex flex-col gap-1">
-                        <p className="text-lg font-bold uppercase text-black">
+                        <FormLabel className="text-lg font-bold uppercase text-black">
                           Nome:
-                        </p>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Nome"

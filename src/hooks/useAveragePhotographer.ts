@@ -5,21 +5,18 @@ import { useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 async function fetch(id: number, role: Role) {
-  if (role === 'fotografo') {
-    const { data } = await api.get(`/mediaAvaliacoesFotografo/${id.toString()}`)
+  if (role === 'fotografo') return null
 
-    return data
-  } else if (role === 'cliente') {
-    const { data } = await api.get(`/mediaAvaliacoesCliente/${id.toString()}`)
+  const { data } = await api.get(`/mediaAvaliacoesFotografo/${id.toString()}`)
 
-    return data
-  }
+  return data
 }
 
-export function useAverageUser(id: number, role: Role) {
+export function useAveragePhotographer(id: number, role: Role) {
   const query = useQuery<AverageData, AxiosError>({
-    queryKey: ['userAverageRating', id],
+    queryKey: ['photographerAverageRating', id],
     queryFn: async () => await fetch(id, role),
+    enabled: role === 'admin' || role === 'cliente',
     retry: false,
   })
 

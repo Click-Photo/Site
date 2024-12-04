@@ -22,7 +22,6 @@ interface ProtographerOptionsProps extends UserData {
 }
 
 export function PhotographerOptions({
-  id,
   nome,
   email,
   telefone,
@@ -139,7 +138,7 @@ export function PhotographerOptions({
             </Link>
 
             <Link
-              href={`/interesses/${id}`}
+              href={`/interesses`}
               className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl bg-gray-light-click px-7 py-5 text-[#555555] transition-colors hover:bg-white hover:text-black"
             >
               <div className="flex items-center gap-2 sm:gap-4">

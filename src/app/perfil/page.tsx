@@ -29,6 +29,7 @@ export default function Profile() {
   const {
     data: userFetched,
     isLoading: isLoadingUser,
+    isFetched: isFetchedUser,
     isError: isErrorUser,
     error: errorUser,
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -37,14 +38,16 @@ export default function Profile() {
   const {
     data: portfolio,
     isLoading: isLoadingPortfolio,
+    isFetched: isFetchedPortfolio,
     isError: isErrorPortfolio,
     error: errorPortfolio,
     // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = usePorfolioPhotographer(user.id, user.role)
+  } = usePorfolioPhotographer(user.id)
 
   const {
     data: average,
     isLoading: isLoadingAverage,
+    isFetched: isFetchedAverage,
     isError: isErrorAverage,
     error: errorAverage,
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -56,7 +59,7 @@ export default function Profile() {
     errorAverage?.status === 401
   ) {
     logout()
-    router.push('/login')
+    return router.push('/login')
   }
 
   return (
@@ -65,49 +68,79 @@ export default function Profile() {
       {isErrorUser && <MessageError message={errorUser.message} />}
       {isErrorPortfolio && <MessageError message={errorPortfolio.message} />}
       {isErrorAverage && <MessageError message={errorAverage.message} />}
-      <NavbarUser />
-      {userFetched && (
-        <section className="flex min-h-[calc(100vh-6rem)] w-screen items-center px-6 py-12">
-          <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
-            <div className="flex flex-col gap-4">
-              <h1 className="self-center font-secondary text-xl font-bold text-white">
-                {userFetched.nome}
-              </h1>
-            </div>
+      {isFetchedUser &&
+        isFetchedAverage &&
+        isFetchedPortfolio &&
+        user.role === 'fotografo' && (
+          <>
+            <NavbarUser />
+            <section className="flex min-h-[calc(100vh-6rem)] w-screen items-center px-6 py-12">
+              <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
+                <div className="flex flex-col gap-4">
+                  <h1 className="self-center font-secondary text-xl font-bold text-white">
+                    {userFetched!.nome}
+                  </h1>
+                </div>
 
-            <div className="flex w-full max-w-96 items-center justify-evenly">
-              <div className="flex w-full flex-col items-center gap-1 text-[#F8B84E] sm:w-28">
-                <p className="text-sm">{average?.mediaNota}</p>
-                <StarRating score={average!.totalAvaliacoes} />
+                <div className="flex w-full max-w-96 items-center justify-evenly">
+                  {average && (
+                    <div className="flex w-full flex-col items-center gap-1 text-[#F8B84E] sm:w-28">
+                      <p className="text-sm">{average.mediaNota}</p>
+                      <StarRating
+                        score={
+                          average.mediaNota === 'Sem avaliações'
+                            ? 0
+                            : average.mediaNota
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+                <PhotographerOptions
+                  nome={userFetched!.nome}
+                  email={userFetched!.email}
+                  telefone={userFetched!.telefone}
+                  CEP={userFetched!.CEP}
+                  CPF={userFetched!.CPF}
+                  id={userFetched!.id}
+                  role={userFetched!.role}
+                  portfolio={portfolio}
+                />
               </div>
-            </div>
+            </section>
+          </>
+        )}
+      {isFetchedUser && isFetchedAverage && user.role === 'cliente' && (
+        <>
+          <NavbarUser />
+          <section className="flex min-h-[calc(100vh-6rem)] w-screen items-center px-6 py-12">
+            <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
+              <div className="flex flex-col gap-4">
+                <h1 className="self-center font-secondary text-xl font-bold text-white">
+                  {userFetched!.nome}
+                </h1>
+              </div>
 
-            {user.role === 'fotografo' && (
-              <PhotographerOptions
-                nome={userFetched.nome}
-                email={userFetched.email}
-                telefone={userFetched.telefone}
-                CEP={userFetched.CEP}
-                CPF={userFetched.CPF}
-                id={userFetched.id}
-                role={userFetched.role}
-                portfolio={portfolio}
-              />
-            )}
-
-            {user.role === 'cliente' && (
+              <div className="flex w-full max-w-96 items-center justify-evenly">
+                {average && (
+                  <div className="flex w-full flex-col items-center gap-1 text-[#F8B84E] sm:w-28">
+                    <p className="text-sm">{average.mediaNota}</p>
+                    <StarRating score={average.totalAvaliacoes} />
+                  </div>
+                )}
+              </div>
               <ClientOptions
-                nome={userFetched.nome}
-                email={userFetched.email}
-                telefone={userFetched.telefone}
-                CEP={userFetched.CEP}
-                CPF={userFetched.CPF}
-                id={userFetched.id}
-                role={userFetched.role}
+                nome={userFetched!.nome}
+                email={userFetched!.email}
+                telefone={userFetched!.telefone}
+                CEP={userFetched!.CEP}
+                CPF={userFetched!.CPF}
+                id={userFetched!.id}
+                role={userFetched!.role}
               />
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        </>
       )}
     </>
   )

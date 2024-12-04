@@ -1,4 +1,4 @@
 export interface AverageData {
-  mediaNota: 'Sem Avaliações' | number
+  mediaNota: 'Sem avaliações' | number
   totalAvaliacoes: number
 }

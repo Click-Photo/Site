@@ -14,8 +14,10 @@ export default function Login() {
   const router = useRouter()
 
   if (token || user) {
-    if (user?.role !== 'admin') {
+    if (user?.role === 'cliente') {
       return router.push('/feed')
+    } else if (user?.role === 'fotografo') {
+      return router.push('/jobs')
     } else {
       return router.push('/admin')
     }

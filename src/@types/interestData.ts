@@ -1,9 +1,10 @@
 import { Status } from './statusEnum'
 
-export interface JobData {
+export interface InterestData {
+  interesseId: number
   id: number
   idCliente: number
-  idFotografo: number
+  idFotografo: number | null
   dataJob: Date
   titulo: string
   descricao: string
