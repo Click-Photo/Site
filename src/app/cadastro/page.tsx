@@ -5,7 +5,7 @@ import { FormRegister } from './components/FormRegister'
 
 export default function Register() {
   return (
-    <section className="relative flex h-screen w-screen flex-col items-center justify-center gap-4 px-6">
+    <section className="relative flex min-h-screen w-screen flex-col items-center justify-center gap-4 px-6 py-12">
       <Image
         src={shapeLogin}
         alt="Shape Login"

@@ -24,6 +24,10 @@ export default function Feed() {
     return router.push('/admin')
   }
 
+  if (user.role === 'fotografo') {
+    return router.push('/jobs')
+  }
+
   const {
     data: photographersFetched,
     isError: isErrorPhotographers,

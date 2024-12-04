@@ -40,18 +40,22 @@ export function NavbarUser() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="font-secondary">
-            <DropdownMenuItem
-              className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
-              asChild
-            >
-              <Link href="/feed">Feed</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
-              asChild
-            >
-              <Link href="/perfil">Perfil</Link>
-            </DropdownMenuItem>
+            {user?.role === 'cliente' && (
+              <DropdownMenuItem
+                className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
+                asChild
+              >
+                <Link href="/feed">Feed</Link>
+              </DropdownMenuItem>
+            )}
+            {user?.role === 'fotografo' && (
+              <DropdownMenuItem
+                className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
+                asChild
+              >
+                <Link href="/jobs">Feed</Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem
               className="cursor-pointer hover:bg-gray-dark-click hover:text-white focus:bg-gray-dark-click focus:text-white"
               asChild
